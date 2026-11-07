@@ -1,52 +1,26 @@
-# zepp-insights
+<h1 align="center">zepp-insights</h1>
 
-Pull health data from your Amazfit/Zepp watch into a local SQLite database.
-The dashboard and AI interpretation layers are not built yet — this is the
-ETL + database stage.
+![Python](https://img.shields.io/badge/python-3.12-3776ab?logo=python&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-0f80cc?logo=sqlite&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-2.2.3-150000?logo=pandas&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-2.2-000000?logo=flask&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-2c6e91?logo=ollama&logoColor=white)
+![Pydantic](https://img.shields.io/badge/pydantic-v2-e9218a?logo=pydantic&logoColor=white)
 
-## Layout
+zepp-insights extracts health insights from your Amazfit watch with the help of AI. Your watch collects the data — zepp-insights pulls it into a local database, shows what it means, and lets an AI interpret it for you. Explore trends, recovery, and training load in a dashboard built on your machine, where your health data belongs to you.
 
-```
-etl/    Zepp API client + sync (pull into SQLite)
-db/     SQLite schema and connection helpers
-notebooks/  pandas exploration notebooks
-```
+## Data Types
 
-## Quick start
+| Type | Description |
+|------|-------------|
+| `heart-rate` | Minute-by-minute BPM readings |
+| `sleep` | Nightly score, stages (light/deep/REM/awake), duration, resting HR |
+| `steps` | Daily total, distance, calories, activity segments |
+| `stress` | 5-minute interval stress levels with zone percentages |
+| `training-load` | ATL, CTL, TSB, exercise score |
+| `sport-load` | Daily and weekly training load with optimal range |
+| `phn` | TRIMP (Training Impulse) and derived ATL/CTL/TSB |
 
-```bash
-# 1. Credentials (one-time) — see .env.example
-python -m etl login
-
-# 2. Pull data into the database
-python -m etl sync --from 2026-04-01 --to 2026-11-07   # all types
-python -m etl sync --type sleep                          # one type only
-python -m etl sync                                       # last 7 days
-
-# 3. Explore in a notebook
-jupyter notebook notebooks/explore.ipynb
-```
-
-The database lives at `~/.zepp-insights/zepp.db` (override with `ZEPP_INSIGHTS_DB`).
-
-## CLI
-
-```bash
-python -m etl sync --from 2026-01-01 --to 2026-01-31
-python -m etl sync --type heart-rate
-python -m etl export --format csv --output data.csv
-python -m etl status
-```
-
-## Data types pulled
-
-heart-rate, sleep, steps, stress, training-load, sport-load, phn
-
-Re-syncing is always safe — it upserts, so no duplicates.
-
-## License
-
-MIT. See [LICENSE](LICENSE).
 
 ---
 
