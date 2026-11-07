@@ -11,7 +11,7 @@ class ZeppAuthError(Exception):
       3. Extract the 'apptoken' from browser cookies
       4. Update your .env or ~/.zepp-export/config
 
-    Or run: python -m zepp_export login
+    Or run: python -m etl login
     """
 
 

@@ -5,7 +5,7 @@ Wraps the unofficial Huami Cloud API with built-in decoding for all data formats
 
 Example::
 
-    from zepp_export import ZeppClient
+    from etl import ZeppClient
 
     client = ZeppClient(token="your_token", user_id="your_id")
     hr = client.get_heart_rate("2026-02-06")
@@ -45,7 +45,7 @@ class ZeppClient:
             raise ZeppAuthError(
                 "No token provided. Get one from "
                 "https://user.huami.com/privacy/index.html "
-                "or run: python -m zepp_export login"
+                "or run: python -m etl login"
             )
         if not user_id:
             raise ValueError("user_id is required")
@@ -92,7 +92,7 @@ class ZeppClient:
             raise ZeppAuthError(
                 "Token expired. Get a fresh token from "
                 "https://user.huami.com/privacy/index.html "
-                "or run: python -m zepp_export login"
+                "or run: python -m etl login"
             )
 
         if resp.status_code != 200:

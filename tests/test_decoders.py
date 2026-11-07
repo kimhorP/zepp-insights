@@ -1,4 +1,4 @@
-"""Tests for zepp_export.decoders.
+"""Tests for etl.decoders.
 
 Uses hardcoded input/output pairs from real API data to verify
 that all decoders produce correct results.
@@ -8,13 +8,13 @@ import base64
 import json
 import pytest
 
-from zepp_export.decoders import (
+from etl.decoders import (
     decode_summary,
     decode_heart_rate,
     decode_heart_rate_raw,
     decode_stress_data,
 )
-from zepp_export.exceptions import ZeppDecodeError
+from etl.exceptions import ZeppDecodeError
 
 
 # -----------------------------------------------------------------------

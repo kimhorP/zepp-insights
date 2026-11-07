@@ -25,6 +25,12 @@ env/
 .DS_Store
 Thumbs.db
 
+# Design notes / working docs
+docs/superpowers/
+
+# Notebooks (local exploration)
+notebooks/
+
 # Data files (user-specific)
 *.json
 !examples/*.json

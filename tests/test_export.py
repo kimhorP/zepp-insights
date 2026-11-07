@@ -1,10 +1,10 @@
-"""Tests for zepp_export.export."""
+"""Tests for etl.export."""
 
 import os
 import tempfile
 from xml.etree.ElementTree import parse as xml_parse
 
-from zepp_export.export import export_csv, export_apple_health
+from etl.export import export_csv, export_apple_health
 
 
 class TestExportCSV:

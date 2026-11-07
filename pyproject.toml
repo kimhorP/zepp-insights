@@ -1,8 +1,8 @@
 [project]
-name = "zepp-export"
+name = "zepp-insights"
 version = "0.3.0"
-description = "Open-source tools for accessing your Amazfit/Zepp health data"
-requires-python = ">=3.9"
+description = "Local-first health analytics for Amazfit watches: ETL, dashboards, and AI insights"
+requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = [
     "requests",
@@ -11,8 +11,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/evankp/zepp-export"
-Documentation = "https://github.com/evankp/zepp-export/tree/main/docs"
+Repository = "https://github.com/evankp/zepp-insights"
 
 [tool.setuptools.packages.find]
-include = ["zepp_export*"]
+include = ["etl*", "db*"]

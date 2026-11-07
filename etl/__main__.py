@@ -1,4 +1,4 @@
-"""Entry point for python -m zepp_export."""
+"""Entry point for python -m etl."""
 
 from .cli import main
 

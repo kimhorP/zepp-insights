@@ -1,20 +1,48 @@
 # zepp-insights
 
-AI-powered health analytics for Amazfit watches. Your watch collects health data. zepp-insights reads that data and shows what it means. You explore trends, recovery, and training load in a local dashboard.
+Pull health data from your Amazfit/Zepp watch into a local SQLite database.
+The dashboard and AI interpretation layers are not built yet — this is the
+ETL + database stage.
 
-## Features
+## Layout
 
-### Insights
+```
+etl/    Zepp API client + sync (pull into SQLite)
+db/     SQLite schema and connection helpers
+notebooks/  pandas exploration notebooks
+```
 
-- **Training load and recovery** — See ATL, CTL, and TSB over time. Know when you rest well and when you train too much.
-- **Sleep quality** — See your nightly score, sleep stages (light, deep, REM, awake), and resting heart rate.
-- **Stress patterns** — See 5-minute stress zones across the day. Find recovery windows and periods of strain.
-- **Heart rate trends** — See minute-by-minute timelines. Heart rate zones use different colors.
-- **Daily summary** — See steps, resting heart rate, sleep score, and average stress in one view.
+## Quick start
 
-## Credits
+```bash
+# 1. Credentials (one-time) — see .env.example
+python -m etl login
 
-Data sync uses **[zepp-export](https://github.com/EvanCooke/zepp-export)** by **[Evan Cooke](https://github.com/EvanCooke)**. That project reverse-engineered the Zepp Cloud API. zepp-insights builds on that work to analyze what the data means.
+# 2. Pull data into the database
+python -m etl sync --from 2026-04-01 --to 2026-11-07   # all types
+python -m etl sync --type sleep                          # one type only
+python -m etl sync                                       # last 7 days
+
+# 3. Explore in a notebook
+jupyter notebook notebooks/explore.ipynb
+```
+
+The database lives at `~/.zepp-insights/zepp.db` (override with `ZEPP_INSIGHTS_DB`).
+
+## CLI
+
+```bash
+python -m etl sync --from 2026-01-01 --to 2026-01-31
+python -m etl sync --type heart-rate
+python -m etl export --format csv --output data.csv
+python -m etl status
+```
+
+## Data types pulled
+
+heart-rate, sleep, steps, stress, training-load, sport-load, phn
+
+Re-syncing is always safe — it upserts, so no duplicates.
 
 ## License
 
